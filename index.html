@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="stopwatch">ストップウォッチ</div>
+    <div id="time">0:0:0:0</div>
+    <div class="startstop">
+        <button id="startButton" class="button" onclick="watchStart()">スタート</button>
+        <button id="stopButton" class="button" onclick="watchStop()">ストップ</button>
+        <button id="resetButton" class="button" onclick="watchReset()">リセット</button>
+    </div>
+    <script>
+        let displayTime = document.getElementById('time');
+        let [onesPlace, tensPlace, hundredsPlace, thousandsPlace] = [0, 0, 0, 0];
+        let intervalId = null;
+
+        function stopwatch() {
+            onesPlace++;
+            if (onesPlace == 10) {
+                tensPlace++;
+                onesPlace = 0;
+                if (tensPlace == 10) {
+                    hundredsPlace++;
+                    tensPlace = 0;
+                    if (hundredsPlace == 10) {
+                        thousandsPlace++;
+                        hundredsPlace = 0;
+                    }
+                }
+            }
+            displayTime.innerHTML = thousandsPlace + ":" + hundredsPlace + ":" + tensPlace + ":" + onesPlace;
+        }
+
+        function watchStart() {
+            if (intervalId == null) {
+                intervalId = setInterval(stopwatch, 1000);
+            }
+        }
+
+        function watchStop() {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+
+        function watchReset() {
+            clearInterval(intervalId);
+            intervalId = null;
+            [onesPlace, tensPlace, hundredsPlace, thousandsPlace] = [0, 0, 0, 0];
+            displayTime.innerHTML = "0:0:0:0";
+        }
+    </script>
+</body>
+</html>
