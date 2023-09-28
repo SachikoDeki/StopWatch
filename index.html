@@ -15,7 +15,7 @@
     <script>
         let displayTime = document.getElementById('time');
         let [onesPlace, tensPlace, hundredsPlace, thousandsPlace] = [0, 0, 0, 0];
-        let intervalId = null;
+        let elapsedId = null;
 
         function stopwatch() {
             onesPlace++;
@@ -35,19 +35,19 @@
         }
 
         function watchStart() {
-            if (intervalId == null) {
-                intervalId = setInterval(stopwatch, 1000);
+            if (elapsedId == null) {
+                elapsedId = setInterval(stopwatch, 1000);
             }
         }
 
         function watchStop() {
-            clearInterval(intervalId);
-            intervalId = null;
+            clearInterval(elapsedId);
+            elapsedId = null;
         }
 
         function watchReset() {
-            clearInterval(intervalId);
-            intervalId = null;
+            clearInterval(elapsedId);
+            elapsedId = null;
             [onesPlace, tensPlace, hundredsPlace, thousandsPlace] = [0, 0, 0, 0];
             displayTime.innerHTML = "0:0:0:0";
         }
